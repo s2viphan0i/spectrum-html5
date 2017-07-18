@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="description" content="HTML5 Audio Spectrum Visualizer">
+        <title>HTML5 Audio Spectrum Visualizer - Alexandre Juca</title>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+        <link type="text/css" rel="stylesheet" href="style/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="./js/velocity.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <a class="McButton" id="button" data="hamburger-menu">
+                <b></b>
+                <b></b>
+                <b></b>
+            </a>
+            <div id="menu"></div>
+            <div id="fileWrapper" class="file_wrapper">
+                <div id="info">
+                    
+                </div>
+
+                <label for="uploadedFile"></label>
+                <input type="file" id="uploadedFile"></input>
+            </div>
+            <div id="background1">
+            </div>
+            <div id="background2">
+            </div>
+            <div id="visualizer_wrapper">
+
+                 <canvas id='mono-L' width="1000" height="350"></canvas>
+                 <canvas id='mono-R' width="1000" height="0"></canvas>
+            </div>
+            <div id="drag"></div>
+        </div>
+        <script type="text/javascript" src="js/visualizer.js"></script>
+        <script type="text/javascript">
+            /* A simple and scalable hamburger menu using css transitions. */
+            var McButton = $("[data=hamburger-menu]");
+            var McBar1 = McButton.find("b:nth-child(1)");
+            var McBar2 = McButton.find("b:nth-child(2)");
+            var McBar3 = McButton.find("b:nth-child(3)");
+
+
+
+            McButton.click( function() {
+              $(this).toggleClass("active");
+              $('body').toggleClass('menu-open');
+              if (McButton.hasClass("active")) {
+                McBar1.velocity({ top: "50%" }, {duration: 200, easing: "swing"});
+                McBar3.velocity({ top: "50%" }, {duration: 200, easing: "swing"})
+                            .velocity({rotateZ:"90deg"}, {duration: 800, delay: 200, easing: [500,20] });
+                McButton.velocity({rotateZ:"135deg"}, {duration: 800, delay: 200, easing: [500,20] });
+              } else {
+                McButton.velocity("reverse");
+                    McBar3.velocity({rotateZ:"0deg"}, {duration: 800, easing: [500,20] })
+                            .velocity({ top: "100%" }, {duration: 200, easing: "swing"});
+                McBar1.velocity("reverse", {delay: 800});
+              }
+            });
+        </script>
+    </body>
+</html>
