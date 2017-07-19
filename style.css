@@ -1,0 +1,271 @@
+@font-face {
+    font-family: Lato;
+    src: url('./lato-light.ttf');
+}
+
+html, body {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    color: #FEFEFE;
+    width: 100%;
+    height: 100%;
+}
+img{
+	position: absolute;
+	top: -100px;
+	left: -70px;
+	width: 110%;
+}
+#img2{
+	z-index: -999;
+}
+#img1{
+	z-index: 100;
+}
+#wrapper{
+	width: 100%;
+	height: 100%;
+}
+#background1{
+	background: url('../img/1.png') no-repeat center center;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 5;
+}
+#background2{
+	background: url('../img/2.png') no-repeat center center;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+body{
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+canvas{
+	z-index: 4;
+}
+#message{
+	opacity: 1;
+	transition:all 0.5s ease;
+}
+#fileWrapper{
+	transition:all 0.5s ease;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 101;
+}
+#fileWrapper:hover{
+	opacity: 1!important;
+}
+
+#visualizer_wrapper{
+	position: absolute;
+	top: 40%;
+    text-align: center;
+    margin-top: -115px;
+}
+
+#mono-R
+{
+	transform: rotateX(230deg);
+	-webkit-transform:(230deg);
+	transform: rotateX(230deg);
+	top: -66px;
+	position: relative;
+}
+
+input[type="file"]
+{
+	background: #0CD7FD;
+}
+
+#info
+{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+	top: 120px;
+	font-size: 28px;
+}
+
+.text{
+	color: #FEFEFE;
+	font-size: 30px; 
+}
+#drag{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 999;
+}
+
+
+/*hamburger menu*/
+
+#menu{
+	width: 350px;
+	height: 100%;
+	background: #272727;
+	position: fixed;
+	transform: translateX(-350px);
+	transition: transform 0.6s cubic-bezier(.56,.1,.34,.91);
+	padding-top: 6.2rem;
+	margin: 0;
+	list-style: none;
+	padding: 0;
+	z-index: 99998;
+	text-align: center;
+    font-family: 'Lato', sans-serif;
+}
+
+#menu .space{
+	margin-top: 80px;
+}
+
+#menu .player{
+	text-align: center;
+}
+#menu .player i{
+	font-size: 50px;
+	width: 50px;
+	height: 50px;
+	margin: 0 20px;
+	cursor: pointer;
+	transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-webkit-transition: color .2s ease-in-out;
+}
+#menu .player i:hover, #menu .player i:focus{
+	transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-webkit-transition: color .2s ease-in-out;
+	color: #848484;
+}
+#menu #link{
+	margin: 30px 0;
+	width: 200px;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 0;
+    border-radius: 0px;
+    background-color: #272727;
+    font-size: 12px;
+    color: #c9c9c9;
+    border-bottom: 1px solid;
+    border-color: #c9c9c9;
+}
+.addlink *{
+	display: inline-block;
+}
+.addlink i{
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	margin-left: 10px;
+	transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-webkit-transition: color .2s ease-in-out;
+}
+.addlink i:hover, .addlink i:focus{
+	transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-webkit-transition: color .2s ease-in-out;
+	color: #848484;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#menu ul{
+	width: 272px;
+}
+#menu ul li{
+	text-decoration: none;
+	list-style: none;
+	text-align: left;
+	cursor: pointer;
+	color: #848484;
+	width: auto;
+	margin: 0 0;
+}
+#menu ul li span:hover, #menu ul li span:focus{
+	color: #fefefe;
+}
+#menu ul li *{
+	display: inline-block;
+}
+#menu ul li span{
+	display: inline-block;
+	height: 19px;
+	width: 230px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#menu ul li i{
+	float: right;
+	width: 16px;
+	height: 16px;
+}
+#menu ul li i:hover, #menu ul li i:focus{
+	color: #fefefe;
+}
+.menu-open #menu {
+	transform: translateX(0);
+}
+
+/* Hamburger Menu */
+.McButton {
+	width: 44px;
+	color: white;
+	position: absolute;
+	top: 44px;
+	left: 44px;
+	margin-left: -22px;
+	margin-top: -22px;
+	height: 33px;
+	cursor: pointer;
+	z-index: 99999;
+	transition: opacity .5s ease-in-out;
+	-moz-transition: opacity .5s ease-in-out;
+	-webkit-transition: opacity .5s ease-in-out;
+}
+b{
+	position: absolute;
+	left: 0;
+	width: 44px;
+	height: 3px;
+	background-color: white;
+}
+.McButton:focus, .McButton:hover{
+	opacity: 1 !important;
+	transition: opacity .5s ease-in-out;
+	-moz-transition: opacity .5s ease-in-out;
+	-webkit-transition: opacity .5s ease-in-out;
+}
+.McButton.active {
+	opacity: 1 !important;
+}
+b:nth-child(1) {
+  top: 0;
+}
+b:nth-child(2) {
+  top: 50%;
+}
+b:nth-child(3) {
+  top: 100%;
+}
+/* McButton */

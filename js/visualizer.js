@@ -34,23 +34,12 @@ Visualizer.prototype = {
         var that = this,
             audioInput = document.getElementById('uploadedFile'),
             dropContainer = document.getElementById('drag');
-        //listen the file upload
-        audioInput.onchange = function() {
-            //the if statement fixes the file selction cance,l because the onchange will trigger even the file selection been canceled
-            if (audioInput.files.length !== 0) {
-                //only process the first file
-                that.file = audioInput.files[0];
-                that.fileName = that.file.name;
-                if (that.status === 1) {
-                    //the sound is still playing but we upload another file, so set the forceStop flag to true
-                    that.forceStop = true;
-                };
-                document.getElementById('button').style.opacity = 1;
-                that._updateInfo('Uploading', true);
-                //once the file is ready,start the visualizer
-                that._start();
-            };
-        };
+            addBtn = document.getElementById('add');
+        //listen the button click
+        console.log(addBtn);
+        addBtn.addEventListener("click", function(){
+            that._loadDoc();
+        });
         //listen the drag & drop
         dropContainer.addEventListener("dragenter", function() {
             document.getElementById('button').style.opacity = 1;
@@ -79,8 +68,21 @@ Visualizer.prototype = {
             };
             that.fileName = that.file.name;
             //once the file is ready,start the visualizer
-            that._start();
+            //that._start();
+            var url = 'http://zmp3-mp3-s1-te-zmp3-fpthn-1.zadn.vn/3292444e9b0a72542b1b/6792228024536335773?key=0JY3ZyBh61LSTdScDtonbg&expires=1500558535';
+            that._loadSound(url);
         }, false);
+    },
+    _loadDoc: function() {
+        var that = this, xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                that._loadSound(this.responseText);
+            }
+        };
+        var url = './request.php?id=IWB6Z60D';
+        xhttp.open("GET", url, true);
+        xhttp.send();
     },
     _start: function() {
         //read and decode the file into audio array buffer 
@@ -90,10 +92,12 @@ Visualizer.prototype = {
         fr.onload = function(e) {
             var fileResult = e.target.result;
             var audioContext = that.audioContext;
+            console.log(file);
             if (audioContext === null) {
                 return;
             };
             that._updateInfo('', true);
+            console.log(fileResult);
             audioContext.decodeAudioData(fileResult, function(buffer) {
                 that._updateInfo('', true);
                 that._visualize(audioContext, buffer);
@@ -109,6 +113,24 @@ Visualizer.prototype = {
         //assign the file to the reader
         this._updateInfo('', true);
         fr.readAsArrayBuffer(file);
+    },
+    _loadSound: function(url) {
+        var that = this;
+        var context = that.audioContext;
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+        // Decode asynchronously
+        request.onload = function() {
+            context.decodeAudioData(request.response, function(buffer) {
+                that._updateInfo('', true);
+                that._visualize(context, buffer);
+            }, function(e) {
+                that._updateInfo('', false);
+                console.log(e);
+            });
+        }
+        request.send();
     },
     _visualize: function(audioContext, buffer) {
         var audioBufferSouceNode = audioContext.createBufferSource(),
